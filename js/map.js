@@ -2,7 +2,7 @@
   var google = new L.Google('ROADMAP');
   var satellite = new L.Google('SATELLITE');
   var terrain = new L.Google('TERRAIN');
-  var topo = L.tileLayer('http://dl.dropboxusercontent.com/u/88844/topo/z{z}/{y}/{x}.png', {
+  var topo = L.tileLayer('http://s3-eu-west-1.amazonaws.com/topo-slovenia/z{z}/{y}/{x}.png', {
     minZoom: 10,
     maxNativeZoom: 15,
     detectRetina: true,
