@@ -6,7 +6,7 @@
     minZoom: 10,
     maxNativeZoom: 15,
     detectRetina: true,
-    attribution: '© <a href="http://mr.si/">Miha Rekar</a>'
+    attribution: '© <a href="http://www.gu.gov.si/">GURS</a>'
   });
 
   var map = L.map('map', {
