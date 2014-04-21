@@ -1,9 +1,9 @@
 orientationBugfix = ->
   window.scrollTo 0, 0
 
-google = new L.Google("ROADMAP")
-satellite = new L.Google("SATELLITE")
-terrain = new L.Google("TERRAIN")
+google = new L.Google('ROADMAP')
+satellite = new L.Google('SATELLITE')
+terrain = new L.Google('TERRAIN')
 topo = L.tileLayer 'http://s3-eu-west-1.amazonaws.com/topo-slovenia/z{z}/{y}/{x}.png', {
   minZoom: 10
   maxNativeZoom: 15
@@ -38,6 +38,12 @@ map.on 'startfollowing', ->
 
 map.on 'stopfollowing', ->
   map.off 'dragstart', lc.stopFollowing
+
+map.on 'click', (e) ->
+  if lc._event
+    distance = e.latlng.distanceTo(lc._event.latlng)
+    content = Number(distance.toFixed(1)).toLocaleString() + ' m'
+    L.popup().setLatLng(e.latlng).setContent(content).openOn(map)
 
 lc.locate()
 
