@@ -1,6 +1,3 @@
-orientationBugfix = ->
-  window.scrollTo 0, 0
-
 google = new L.Google('ROADMAP')
 satellite = new L.Google('SATELLITE')
 terrain = new L.Google('TERRAIN')
@@ -16,7 +13,7 @@ map = L.map('map', {
   minZoom: 6
 }).setView([46, 14.7], 8)
 
-L.control.scale().addTo(map)
+L.control.scale({ imperial: false }).addTo(map)
 
 L.control.layers({
   Google: google
@@ -39,13 +36,4 @@ map.on 'startfollowing', ->
 map.on 'stopfollowing', ->
   map.off 'dragstart', lc.stopFollowing
 
-map.on 'click', (e) ->
-  if lc._event && lc._active
-    distance = e.latlng.distanceTo(lc._event.latlng)
-    content = Number(distance.toFixed(1)).toLocaleString() + ' m'
-    L.popup().setLatLng(e.latlng).setContent(content).openOn(map)
-
 lc.locate()
-
-window.addEventListener 'orientationchange', orientationBugfix
-orientationBugfix()

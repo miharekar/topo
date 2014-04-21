@@ -21,7 +21,7 @@ So this were the steps:
 - `./tiles_merge.py ../Slovenia/*.zyx ../Slovenia/final`
 - `brew install pngquant`
 - `find . -name '*.png' -print0 | xargs -0 -P4 pngquant --ext .png --force 256`
-- while all this is being processed write a simple [leaflet](http://leafletjs.com/) [map display](js/map.coffee)
+- while all this is being processed write a simple [leaflet](http://leafletjs.com/) map display
 - copy images to [S3](https://aws.amazon.com/s3/)
 - publish this on [GitHub](http://github.com/)
 - grab a :beer: 'cause it was a great hack day :tada:
