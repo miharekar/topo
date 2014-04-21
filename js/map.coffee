@@ -40,7 +40,7 @@ map.on 'stopfollowing', ->
   map.off 'dragstart', lc.stopFollowing
 
 map.on 'click', (e) ->
-  if lc._event
+  if lc._event && lc._active
     distance = e.latlng.distanceTo(lc._event.latlng)
     content = Number(distance.toFixed(1)).toLocaleString() + ' m'
     L.popup().setLatLng(e.latlng).setContent(content).openOn(map)
