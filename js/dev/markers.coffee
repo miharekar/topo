@@ -1,10 +1,11 @@
 mc = null
 
-MarkersControl = L.Control.extend(
+L.Control.Markers = L.Control.extend
   options:
     position: 'topleft'
     disableIcon: 'fa-save'
     enableIcon: 'fa-pencil'
+    locate: null
 
   onAdd: (map) ->
     mc = @
@@ -64,8 +65,8 @@ MarkersControl = L.Control.extend(
     mc.markers.splice(mc.markers.indexOf(@), 1)
 
   distanceInM: (latlng) ->
-    if lc._event && lc._active
-      distance = latlng.distanceTo(lc._event.latlng)
+    if @options.locate._event && @options.locate._active
+      distance = latlng.distanceTo(@options.locate._event.latlng)
       Number(distance.toFixed(1)).toLocaleString() + ' m'
 
   showPopup: ->
@@ -73,5 +74,5 @@ MarkersControl = L.Control.extend(
     content = mc.distanceInM(@getLatLng())
     @bindPopup(content).openPopup() if content
 
-)
-map.addControl new MarkersControl()
+L.control.markers = (options) ->
+  new L.Control.Markers(options)

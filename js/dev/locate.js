@@ -34,8 +34,8 @@ L.Control.Locate = L.Control.extend({
             //color: '#FFA500',
             //fillColor: '#FFB000'
         },
-        icon: 'icon-location',  // icon-locate or icon-direction
-        iconLoading: 'icon-spinner animate-spin',
+        icon: 'fa fa-location-arrow',  // icon-locate or icon-direction
+        iconLoading: 'fa fa-spinner animate-spin',
         circlePadding: [0, 0],
         metric: true,
         onLocationError: function(err) {

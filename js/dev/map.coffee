@@ -13,8 +13,6 @@ map = L.map('map', {
   minZoom: 6
 }).setView([46, 14.7], 8)
 
-L.control.scale({ imperial: false }).addTo(map)
-
 L.control.layers({
   Google: google
   Satellite: satellite
@@ -22,14 +20,10 @@ L.control.layers({
   Topo: topo
 }).addTo(map)
 
-lc = L.control.locate({
-  follow: true
-}).addTo(map)
+L.control.scale({ imperial: false }).addTo(map)
 
-map.on 'startfollowing', ->
-  map.on 'dragstart', lc.stopFollowing
-
-map.on 'stopfollowing', ->
-  map.off 'dragstart', lc.stopFollowing
+lc = L.control.locate().addTo(map)
+L.control.markers({ locate: lc }).addTo(map)
+L.control.compass().addTo(map)
 
 lc.locate()
