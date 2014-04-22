@@ -24,10 +24,6 @@ L.control.layers({
 
 lc = L.control.locate({
   follow: true
-  locateOptions:{
-    maxZoom: 15
-    watch: true
-  }
 }).addTo(map)
 
 map.on 'startfollowing', ->
