@@ -15,11 +15,11 @@ L.Control.Markers = L.Control.extend
     container = L.DomUtil.create('div', 'leaflet-control-markers leaflet-bar leaflet-control')
     @link = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single fa fa-pencil', container)
     L.DomEvent
-      .on(@link, 'click', L.DomEvent.stop)
-      .on(@link, 'click', =>
+      .on(container, 'click', L.DomEvent.stop)
+      .on(container, 'click', =>
         if @editing then @stopEdit() else @startEdit()
       )
-      .on(@link, 'dblclick', L.DomEvent.stop)
+      .on(container, 'dblclick', L.DomEvent.stop)
 
     map.on 'click', (e) =>
       return unless @editing

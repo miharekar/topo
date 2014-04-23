@@ -22,8 +22,8 @@ L.control.layers({
 
 L.control.scale({ imperial: false }).addTo(map)
 
-lc = L.control.locate().addTo(map)
+lc = L.control.locate({ setView: false }).addTo(map)
 L.control.markers({ locate: lc }).addTo(map)
-L.control.compass().addTo(map)
+L.control.compass({ element: lc.icon, offset: -45 }).addTo(map)
 
 lc.locate()

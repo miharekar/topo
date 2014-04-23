@@ -21,11 +21,22 @@ html, body, #map {
   border-bottom: none;
 }
 
-.leaflet-control-locate, .leaflet-control-markers, .leaflet-control-compass a {
+.leaflet-control-markers a, .leaflet-control-compass i {
   font-size: 1.4em;
-  margin-left: 1px;
 }
 
-.leaflet-control-locate.active a {
-  color: #265B86
+.leaflet-control-locate a {
+  font-size: 1.7em;
+}
+
+.leaflet-control-locate.active i {
+  color: #265B86;
+}
+
+i.accurate {
+  color: #ff8080;
+}
+
+i.very-accurate {
+  color: #ff4040;
 }

@@ -86,14 +86,13 @@ L.Control.Locate = L.Control.extend({
         L.extend(tmp, this.options.circleStyle, this.options.followCircleStyle);
         this.options.followCircleStyle = tmp;
 
-        var link = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single ' + this.options.icon, container);
-        link.href = '#';
-        link.title = this.options.strings.title;
+        var link = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single', container);
+        this.icon = L.DomUtil.create('i', this.options.icon, link);
 
         L.DomEvent
-            .on(link, 'click', L.DomEvent.stopPropagation)
-            .on(link, 'click', L.DomEvent.preventDefault)
-            .on(link, 'click', function() {
+            .on(container, 'click', L.DomEvent.stopPropagation)
+            .on(container, 'click', L.DomEvent.preventDefault)
+            .on(container, 'click', function() {
                 if (self._active && (self._event === undefined || map.getBounds().contains(self._event.latlng) || !self.options.setView ||
                     isOutsideMapBounds())) {
                     stopLocate();
@@ -101,7 +100,7 @@ L.Control.Locate = L.Control.extend({
                     locate();
                 }
             })
-            .on(link, 'dblclick', L.DomEvent.stopPropagation);
+            .on(container, 'dblclick', L.DomEvent.stopPropagation);
 
         var locate = function () {
             if (self.options.setView) {
@@ -249,20 +248,20 @@ L.Control.Locate = L.Control.extend({
                 L.DomUtil.removeClasses(self._container, "active following");
                 L.DomUtil.addClasses(self._container, "requesting");
 
-                L.DomUtil.removeClasses(link, self.options.icon);
-                L.DomUtil.addClasses(link, self.options.iconLoading);
+                L.DomUtil.removeClasses(self.icon, self.options.icon);
+                L.DomUtil.addClasses(self.icon, self.options.iconLoading);
             } else if (state == 'active') {
                 L.DomUtil.removeClasses(self._container, "requesting following");
                 L.DomUtil.addClasses(self._container, "active");
 
-                L.DomUtil.removeClasses(link, self.options.iconLoading);
-                L.DomUtil.addClasses(link, self.options.icon);
+                L.DomUtil.removeClasses(self.icon, self.options.iconLoading);
+                L.DomUtil.addClasses(self.icon, self.options.icon);
             } else if (state == 'following') {
                 L.DomUtil.removeClasses(self._container, "requesting");
                 L.DomUtil.addClasses(self._container, "active following");
 
-                L.DomUtil.removeClasses(link, self.options.iconLoading);
-                L.DomUtil.addClasses(link, self.options.icon);
+                L.DomUtil.removeClasses(self.icon, self.options.iconLoading);
+                L.DomUtil.addClasses(self.icon, self.options.icon);
             }
         }
 
