@@ -6,6 +6,7 @@ topo = L.tileLayer 'http://s3-eu-west-1.amazonaws.com/topo-slovenia/z{z}/{y}/{x}
   maxNativeZoom: 15
   detectRetina: true
   attribution: '© <a href="http://www.gu.gov.si/">GURS</a>'
+  unloadInvisibleTiles: false
 }
 
 map = L.map('map', {
