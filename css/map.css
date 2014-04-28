@@ -34,9 +34,9 @@ html, body, #map {
 }
 
 i.accurate {
-  color: #ff8080!important;
+  color: #F77!important;
 }
 
 i.very-accurate {
-  color: #ff4040!important;
+  color: #F00!important;
 }
