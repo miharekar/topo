@@ -27,9 +27,7 @@
       L.Util.setOptions(this, options);
 
       this._ready = google.maps.Map !== undefined;
-      if (!this._ready) {
-        L.Google.asyncWait.push(this);
-      }
+      if (!this._ready) L.Google.asyncWait.push(this);
 
       this._type = type || 'SATELLITE';
     },
@@ -51,7 +49,7 @@
       map.on('zoomanim', this._handleZoomAnim, this);
 
       //20px instead of 1em to avoid a slight overlap with google's attribution
-      map._controlCorners.bottomright.style.marginBottom = "20px";
+      map._controlCorners.bottomright.style.marginBottom = '20px';
 
       this._reset();
       this._update();
@@ -67,7 +65,7 @@
 
       this._map.off('zoomanim', this._handleZoomAnim, this);
 
-      map._controlCorners.bottomright.style.marginBottom = "0em";
+      map._controlCorners.bottomright.style.marginBottom = '0em';
       //this._map.off('moveend', this._update, this);
     },
 
@@ -83,8 +81,8 @@
     },
 
     setElementSize: function (e, size) {
-      e.style.width = size.x + "px";
-      e.style.height = size.y + "px";
+      e.style.width = size.x + 'px';
+      e.style.height = size.y + 'px';
     },
 
     _initContainer: function () {
@@ -93,8 +91,8 @@
 
       if (!this._container) {
         this._container = L.DomUtil.create('div', 'leaflet-google-layer leaflet-top leaflet-left');
-        this._container.id = "_GMapContainer_" + L.Util.stamp(this);
-        this._container.style.zIndex = "auto";
+        this._container.id = '_GMapContainer_' + L.Util.stamp(this);
+        this._container.style.zIndex = 'auto';
       }
 
       tilePane.insertBefore(this._container, first);
@@ -122,13 +120,13 @@
       });
 
       var _this = this;
-      this._reposition = google.maps.event.addListenerOnce(map, "center_changed",
+      this._reposition = google.maps.event.addListenerOnce(map, 'center_changed',
         function () {
           _this.onReposition();
         });
       this._google = map;
 
-      google.maps.event.addListenerOnce(map, "idle",
+      google.maps.event.addListenerOnce(map, 'idle',
         function () {
           _this._checkZoomLevels();
         });
@@ -175,7 +173,6 @@
       this.onReposition();
     },
 
-
     _handleZoomAnim: function (e) {
       var center = e.center;
       var _center = new google.maps.LatLng(center.lat, center.lng);
@@ -184,10 +181,9 @@
       this._google.setZoom(e.zoom);
     },
 
-
     onReposition: function () {
       if (!this._google) return;
-      google.maps.event.trigger(this._google, "resize");
+      google.maps.event.trigger(this._google, 'resize');
     }
   });
 
@@ -204,4 +200,5 @@
     }
     L.Google.asyncWait = [];
   };
+
 })(window.google, L);
