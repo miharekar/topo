@@ -8,8 +8,12 @@ L.Control.Compass = L.Control.extend
 
   onAdd: (map) ->
     cc = @
-
-    Compass.watch @styleNeedle
+    
+    Compass.needGPS ->
+      alert('Go outside and provide GPS')
+    .needMove ->
+      alert('Move forward')
+    .watch @styleNeedle
 
     @container = L.DomUtil.create('div', 'leaflet-control-compass leaflet-bar leaflet-control hidden')
     link = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single fa', @container)
