@@ -8,36 +8,40 @@ L.Control.Compass = L.Control.extend
 
   onAdd: (map) ->
     cc = @
-    
+
     Compass.needGPS ->
       alert('Go outside and provide GPS')
     .needMove ->
       alert('Move forward')
-    .watch @styleNeedle
+    .watch (heading) =>
+      L.DomUtil.removeClass(@container, 'hidden')
+      @colorNeedle(heading)
+      @turnNeedle(heading)
+      @showHeading(heading) if @options.element != @icon
 
     @container = L.DomUtil.create('div', 'leaflet-control-compass leaflet-bar leaflet-control hidden')
-    link = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single fa', @container)
-    @icon = L.DomUtil.create('i', 'fa fa-arrow-up', link)
+    @link = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single fa', @container)
+    @icon = L.DomUtil.create('i', 'fa fa-arrow-up', @link)
 
     @options.element = @icon unless @options.element
 
     @container
 
-  styleNeedle: (heading) ->
-    if cc.options.element == cc.icon
-      L.DomUtil.removeClass(cc.container, 'hidden')
+  colorElement: (offset, accuracy, klass) ->
+    action = if offset <= accuracy then 'addClass' else 'removeClass'
+    L.DomUtil[action](@options.element, klass)
 
-    rotation = "rotate(#{cc.options.offset - heading}deg)"
-    cc.options.element.style.webkitTransform = rotation
+  colorNeedle: (heading) ->
+    offset = Math.sin(heading * (Math.PI / 360)) * 100
+    @colorElement(offset, 15, 'accurate')
+    @colorElement(offset, 3, 'very')
 
-    L.DomUtil.removeClass(cc.options.element, 'accurate')
-    L.DomUtil.removeClass(cc.options.element, 'very-accurate')
+  turnNeedle: (heading) ->
+    rotation = "rotate(#{@options.offset - heading}deg)"
+    @options.element.style.webkitTransform = rotation
 
-    c = Math.sin(heading * (Math.PI / 360)) * 100
-    if Math.abs(c) <= 5
-      L.DomUtil.addClass(cc.options.element, 'very-accurate')
-    else if Math.abs(c) <= 20
-      L.DomUtil.addClass(cc.options.element, 'accurate')
+  showHeading: (heading) ->
+    @link.innerHTML = "#{Math.round(heading)}°"
 
 L.control.compass = (options) ->
   new L.Control.Compass(options)
