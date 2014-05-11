@@ -29,7 +29,7 @@ L.Control.Compass = L.Control.extend
     @container
 
   colorElement: (offset, accuracy, klass) ->
-    action = if offset <= accuracy then 'addClass' else 'removeClass'
+    action = if Math.abs(offset) <= accuracy then 'addClass' else 'removeClass'
     L.DomUtil[action](@options.element, klass)
 
   colorNeedle: (heading) ->
