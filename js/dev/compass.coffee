@@ -15,6 +15,7 @@ L.Control.Compass = L.Control.extend
       alert('Move forward')
     .watch (heading) =>
       L.DomUtil.removeClass(@container, 'hidden')
+      heading += window.orientation
       @colorNeedle(heading)
       @turnNeedle(heading)
       @showHeading(heading) if @options.element != @icon
@@ -37,8 +38,8 @@ L.Control.Compass = L.Control.extend
     @colorElement(offset, 3, 'very')
 
   turnNeedle: (heading) ->
-    rotation = "rotate(#{@options.offset - heading}deg)"
-    @options.element.style.webkitTransform = rotation
+    rotation = @options.offset - heading
+    @options.element.style.webkitTransform = "rotate(#{rotation}deg)"
 
   showHeading: (heading) ->
     @link.innerHTML = "#{Math.round(heading)}°"
