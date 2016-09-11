@@ -1,7 +1,7 @@
 google = new L.Google('ROADMAP')
 satellite = new L.Google('SATELLITE')
 terrain = new L.Google('TERRAIN')
-topo = L.tileLayer 'http://s3-eu-west-1.amazonaws.com/topo-slovenia/z{z}/{y}/{x}.png', {
+topo = L.tileLayer 'https://s3-eu-west-1.amazonaws.com/topo-slovenia/z{z}/{y}/{x}.png', {
   minZoom: 10
   maxNativeZoom: 15
   detectRetina: true
